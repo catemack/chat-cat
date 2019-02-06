@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :login_required
+  before_action :authenticate_user!
 
   def index
   end

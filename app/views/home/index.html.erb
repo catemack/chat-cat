@@ -1,2 +1,17 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<header>
+  <div class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <%= link_to "ChatCat", root_path, class: "navbar-brand" %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse w-100" id="navbarNav">
+      <ul class="nav navbar-nav ml-auto w-100 justify-content-end" id="navbarNav">
+        <li class="nav-item active">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :login_required
+  before_action :authenticate_user!
   before_action :load_channel, only: [:index, :create]
   before_action :load_messages, only: :index
   before_action :load_message, only: [:update, :delete]
