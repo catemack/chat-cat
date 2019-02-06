@@ -1,5 +1,7 @@
-<header>
-  <div class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<%= stylesheet_link_tag 'home' %>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark shadow">
     <%= link_to "ChatCat", root_path, class: "navbar-brand" %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,5 +15,34 @@
         </li>
       </ul>
     </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav-item">
+            <li>
+              <a class="nav-link active" href="#">Test</a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">Test</a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">Test</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div>
+          <p class="border-bottom">test</p>
+          <p>test</p>
+        </div>
+        <div class="message-input-container">
+          <input type="text" placeholder="Type a message..." />
+          <button>send</button>
+        </div>
+      </main>
+    </div>
   </div>
-</header>
+</body>
