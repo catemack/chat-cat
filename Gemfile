@@ -65,3 +65,6 @@ gem 'webpacker'
 gem 'react-rails'
 
 gem 'devise'
+
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.2.1'
