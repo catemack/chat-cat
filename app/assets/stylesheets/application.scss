@@ -1,1 +1,11 @@
 @import "bootstrap";
+
+#message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#inner-message {
+  margin: 0 auto;
+}
