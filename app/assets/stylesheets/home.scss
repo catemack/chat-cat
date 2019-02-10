@@ -1,11 +1,17 @@
-#main-region {
-  padding-top: 56px; /* Space for fixed navbar */
-}
-
 @media (min-width: 768px) {
   [role="main"] {
-    padding-top: 48px; /* Space for fixed navbar */
+    padding-top: 65px; /* Space for fixed navbar */
+    bottom: 5%;
   }
+}
+
+.navbar .fa-cat {
+  font-size: 28px;
+  color: white;
+}
+
+.navbar-brand {
+  font-weight: 450;
 }
 
 .sidebar {
@@ -63,15 +69,49 @@
   text-transform: uppercase;
 }
 
-.message-input-container {
-  border-top: 1px solid #c4c4c4;
+.chat-container {
+  position: relative;
+}
+
+.chat-container p {
+  word-wrap: break-word;
+}
+
+.chat-container ul {
+  list-style: none;
+}
+
+.chat-container li {
+  width: 100%;
+  margin-left: -35px;
+  padding: 10px;
   border-bottom: 1px solid #c4c4c4;
+}
+
+.chat-container li div {
+  display: inline-block;
+}
+
+.chat-container img {
+  margin-top: 0px;
+  width: 55px;
+  height: 55px;
+}
+
+.chat-container .chat-message-body {
+  margin-left: 10px;
+}
+
+.chat-container .header small {
+  margin-left: 5px;
+}
+
+.message-input-container {
   position: relative;
 }
 
 .message-input-container input {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: medium none;
   color: #4c4c4c;
   font-size: 15px;
   min-height: 48px;
@@ -79,9 +119,9 @@
 }
 
 .message-input-container button {
-  height: 50px;
+  height: 47px;
   position: absolute;
   right: 0;
-  top: -1px;
+  top: 0;
   width: 100px;
 }

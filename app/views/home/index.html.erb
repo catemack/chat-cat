@@ -4,7 +4,10 @@
 
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <%= link_to "ChatCat", root_path, class: "navbar-brand" %>
+    <a href="/" class="navbar-brand">
+      <span><i class="fas fa-cat"></i></span>
+      </span>ChatCat</span>
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -30,26 +33,52 @@
         <ul class="nav flex-column">
           <li>
             <a class="nav-link active" href="#">
-              <i class="feather material-icons">chat_bubble_outline</i>
-              <span>Test</span>
+              <i class="feather material-icons">chat</i>
+              <span>Active</span>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#">Test</a>
+            <a class="nav-link" href="#">
+              <i class="feather material-icons">chat_bubble</i>
+              <span>Unread</span>
+            </a>
           </li>
-          <li>
-            <a class="nav-link" href="#">Test</a>
-          </li>
+          <a class="nav-link" href="#">
+            <i class="feather material-icons">chat_bubble_outline</i>
+            <span>Read</span>
+          </a>
         </ul>
       </div>
     </nav>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div>
-        <p class="border-bottom">test</p>
-        <p>test</p>
+      <div class="chat-container">
+        <ul>
+          <li class="clearfix">
+            <div><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="rounded-circle"></div>
+            <div class="chat-message-body clearfix">
+              <div class="header">
+                <strong>Some Cat</strong>
+                <small class="text-muted">some time</small>
+              </div>
+              <p>test message<br />
+              test<br />
+              test</p>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="chat-block"><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="rounded-circle"></div>
+            <div class="chat-block chat-message-body clearfix">
+              <div class="header">
+                <strong>Some Cat</strong>
+                <small class="text-muted">some time</small>
+              </div>
+              <p>test message</p>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="message-input-container">
-        <input type="text" placeholder="Type a message..." />
+        <input type="text" class="form-control input-sm" placeholder="Type a message..." />
         <button type="button" class="btn btn-primary"><i class="material-icons">send</i></button>
       </div>
     </main>
