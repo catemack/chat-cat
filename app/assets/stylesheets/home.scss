@@ -162,6 +162,8 @@ html body {
   top: 1px;
   width: 60px;
   color: whitesmoke;
+  background-color: transparent;
+  border: none;
 
   i {
     vertical-align: middle;
@@ -170,9 +172,5 @@ html body {
 
 .message-input-container button:hover, button:focus, button:active {
   color: #aeafb2;
-  outline: none;
-  border: none !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
+  cursor: pointer;
 }
