@@ -5,6 +5,8 @@ class MessagesController < ApplicationController
   before_action :load_message, only: [:update, :delete]
   before_action :validate_ownership, only: [:update, :delete]
 
+  after_action :alert_channel, only: [:create, :update, :delete]
+
   def index
   end
 
@@ -41,6 +43,10 @@ class MessagesController < ApplicationController
 
   def validate_ownership
     head :forbidden unless @message.user == current_user
+  end
+
+  def alert_channel
+    MessagesChannel.broadcast_to(@message.channel, @message)
   end
 
   def message_params
