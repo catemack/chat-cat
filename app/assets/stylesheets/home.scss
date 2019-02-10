@@ -5,6 +5,13 @@
   }
 }
 
+// main {
+//   position: fixed;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+// }
+
 .navbar .fa-cat {
   font-size: 28px;
   color: white;
@@ -70,6 +77,10 @@
 }
 
 .chat-container {
+  height: calc(100vh - 90px);
+}
+
+.message-container {
   position: relative;
 }
 
@@ -88,18 +99,21 @@
   border-bottom: 1px solid #c4c4c4;
 }
 
-.chat-container li div {
-  display: inline-block;
-}
-
 .chat-container img {
-  margin-top: 0px;
   width: 55px;
   height: 55px;
 }
 
+.chat-container .chat-block {
+  vertical-align: top;
+}
+
+.chat-container .chat-message-icon {
+  float: left;
+}
+
 .chat-container .chat-message-body {
-  margin-left: 10px;
+  margin-left: 65px;
 }
 
 .chat-container .header small {
@@ -107,7 +121,9 @@
 }
 
 .message-input-container {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  width: 95%;
 }
 
 .message-input-container input {
