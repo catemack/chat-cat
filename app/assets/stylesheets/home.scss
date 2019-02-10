@@ -105,13 +105,15 @@ html body {
 }
 
 .chat-container {
+  padding-top: 5px;
   height: calc(100vh - 90px);
-  color: white;
 }
 
 .message-container {
   position: relative;
   overflow-y: auto;
+  height: calc(100vh - 90px);
+  color: white;
 
   // firefox scrollbar styles
   scrollbar-width: thin;

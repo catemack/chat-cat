@@ -2,14 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class ChannelsSidebar extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            activeChannel: -1
-        }
-    }
-
     render() {
         return (
             <nav className="col-md-2 d-none d-md-block bg-light sidebar">
@@ -19,38 +11,20 @@ class ChannelsSidebar extends React.Component {
                     </h6>
 
                     <ul className="nav flex-column">
-                        {this.renderChannels()}
+                        {this.props.chatChannels}
                     </ul>
                 </div>
             </nav>
         )
     }
-
-    renderChannels() {
-        return this.props.chatChannels.map(channel => (
-            <Channel key={channel.id} name={channel.name} active={channel.id === this.state.activeChannel} onClick={e => this.setActiveChannel(e, channel.id)} />
-        ))
-    }
-
-    setActiveChannel(e, id) {
-        e.preventDefault()
-        this.setState({ activeChannel: id })
-    }
 }
 
 ChannelsSidebar.propTypes = {
-    chatChannels: PropTypes.array.isRequired
+    chatChannels: PropTypes.array
+}
+
+ChannelsSidebar.defaultProps = {
+    chatChannels: []
 }
 
 export default ChannelsSidebar
-
-function Channel(props) {
-    return (
-        <li>
-            <a className={props.active ? "nav-link active" : "nav-link"} href={"/channels/" + props.id}>
-                <i className="feather material-icons">{props.active ? "chat" : "chat_bubble_outline"}</i>
-                <span>{props.name}</span>
-            </a>
-        </li>
-    )
-}
