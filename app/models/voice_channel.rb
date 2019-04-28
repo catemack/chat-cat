@@ -1,0 +1,2 @@
+class VoiceChannel < Channel
+end

@@ -13,8 +13,9 @@ class Index extends React.Component {
 
     render() {
         let chatChannels = this.props.chatChannels.map(channel => {
-            return <Channel key={channel.id} channelId={channel.id} channelName={channel.name}
-                active={channel.id === this.state.activeChannel} callback={id => this.channelSelected(id)} />
+            let callback = channel.type === 'VoiceChannel' ? (id => this.joinVoiceChannel(id)) : (id => this.channelSelected(id))
+            return <Channel key={channel.id} channelId={channel.id} channelName={channel.name} type={channel.type}
+                active={channel.id === this.state.activeChannel} callback={callback} />
         })
 
         return (
@@ -30,6 +31,10 @@ class Index extends React.Component {
 
     channelSelected(id) {
         this.setState({ activeChannel: id })
+    }
+
+    joinVoiceChannel(id) {
+        console.log(id)
     }
 }
 

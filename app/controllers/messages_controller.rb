@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
   private
 
   def load_channel
-    @channel = Channel.find(params[:channel_id])
+    @channel = TextChannel.find(params[:channel_id])
   end
 
   def load_messages
