@@ -42,8 +42,7 @@ class ChatView extends React.Component {
         }
 
         if (this.state.messages.length != prevState.messages.length) {
-            let element = document.getElementById('messageContainer')
-            element.scrollTop = element.scrollHeight
+            this.goToBottom()
         }
     }
 
@@ -84,13 +83,18 @@ class ChatView extends React.Component {
         }
     }
 
+    goToBottom() {
+        let element = document.getElementById('messageContainer')
+        element.scrollTop = element.scrollHeight
+    }
+
     submit() {
         axios.post('/channels/' + this.props.activeChannel + '/messages', {
             message: {
                 body: document.getElementById('messageInput').value
             }
         }).then(() => {
-
+            this.goToBottom()
         }).catch(() => {
 
         })
