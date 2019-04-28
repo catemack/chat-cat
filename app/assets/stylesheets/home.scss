@@ -18,7 +18,7 @@ html body {
 
 @media (min-width: 768px) {
   [role="main"] {
-    padding-top: 65px; /* Space for fixed navbar */
+    padding-top: 55px; /* Space for fixed navbar */
     bottom: 5%;
   }
 }
@@ -38,9 +38,9 @@ html body {
   bottom: 0;
   left: 0;
   z-index: 100; /* Behind the navbar */
-  // padding: 48px 0 0; /* Height of navbar */
   padding: 57px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  min-width: 15%;
 }
 
 .sidebar-sticky {
@@ -111,7 +111,8 @@ html body {
 
 .message-container {
   position: relative;
-  overflow-y: auto;
+  // overflow-y: auto;
+  overflow-y: scroll;
   height: calc(100vh - 90px);
   color: white;
 
@@ -159,6 +160,7 @@ html body {
 
 .chat-container .chat-message-body {
   margin-left: 65px;
+  white-space: pre-line;
 }
 
 .chat-container .header {
@@ -177,7 +179,6 @@ html body {
 }
 
 .message-input-container input {
-  // background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   background-color: #33353d;
   color: #aeafb2;
   font-size: 15px;
@@ -223,5 +224,4 @@ html body {
 .message-input-container button:hover {
   color: #aeafb2;
   cursor: pointer;
-  // outline: none;
 }

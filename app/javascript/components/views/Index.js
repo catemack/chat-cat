@@ -22,7 +22,7 @@ class Index extends React.Component {
                 <div className="row">
                     <ChannelsSidebar chatChannels={chatChannels} activeChannel={this.state.activeChannel}
                         selectChannelCallback={this.channelSelected.bind(this)} />
-                    <ChatView selectedChannel={this.state.activeChannel} />
+                    <ChatView activeChannel={this.state.activeChannel} />
                 </div>
             </div>
         )

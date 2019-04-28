@@ -1,13 +1,15 @@
 class MessagesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
+
   before_action :load_channel, only: [:index, :create]
   before_action :load_messages, only: :index
   before_action :load_message, only: [:update, :delete]
+
   before_action :validate_ownership, only: [:update, :delete]
 
-  after_action :alert_channel, only: [:create, :update, :delete]
-
   def index
+    render json: @messages.map { |message| message.show_hash }
   end
 
   def create
@@ -16,15 +18,21 @@ class MessagesController < ApplicationController
     @message.channel = @channel
 
     @message.save!
+
+    render json: @message.show_hash
   end
 
   def update
     @message.assign_attributes(message_params)
     @message.save!
+
+    render json: @message.show_hash
   end
 
   def delete
     @message.destroy!
+
+    render json: @message.show_hash
   end
 
   private
@@ -43,10 +51,6 @@ class MessagesController < ApplicationController
 
   def validate_ownership
     head :forbidden unless @message.user == current_user
-  end
-
-  def alert_channel
-    MessagesChannel.broadcast_to(@message.channel, @message)
   end
 
   def message_params
