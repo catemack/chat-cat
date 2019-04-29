@@ -13,9 +13,6 @@ const LEAVE = 'LEAVE'
 const mediaStreamConstraints = {
     audio: true
 }
-const offerOptions = {
-    offerToReceiveAudio: 1
-}
 const ice = {
     iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
 }
@@ -130,7 +127,6 @@ class Index extends React.Component {
     gotLocalMediaStream(mediaStream) {
         this.localStream = mediaStream
         this.localAudio.srcObject = mediaStream
-        this.localAudio.muted = true
     }
 
     handleLocalMediaStreamError(error) {
@@ -178,7 +174,7 @@ class Index extends React.Component {
     }
 
     handleLeave(data) {
-        let audio = document.getElementById('remoteVideo' + data.from)
+        let audio = document.getElementById('remoteAudio' + data.from)
         audio && audio.remove()
         delete this.pcPeers[data.from]
     }
@@ -190,11 +186,12 @@ class Index extends React.Component {
 
         if (isOffer) {
             pc.createOffer().then(offer => {
-                pc.setLocalDescription(offer)
-                this.broadcastData(this.state.activeVoice, {
-                    type: EXCHANGE,
-                    to: userId,
-                    sdp: JSON.stringify(pc.localDescription)
+                pc.setLocalDescription(offer).then(() => {
+                    this.broadcastData(this.state.activeVoice, {
+                        type: EXCHANGE,
+                        to: userId,
+                        sdp: JSON.stringify(pc.localDescription)
+                    })
                 })
             })
         }
@@ -209,12 +206,11 @@ class Index extends React.Component {
             }
         }
 
-        // pc.onaddstream = event => {
         pc.ontrack = event => {
-            const element = document.createElement('video')
-            element.id = 'remoteVideo' + userId
-            element.autoPlay = 'autoPlay'
-            element.srcObject = event.stream
+            const element = document.createElement('audio')
+            element.id = 'remoteAudio' + userId
+            element.autoplay = true
+            element.srcObject = event.streams[0]
             this.remoteAudioContainer.appendChild(element)
         }
 
