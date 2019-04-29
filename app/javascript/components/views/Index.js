@@ -27,6 +27,7 @@ class Index extends React.Component {
             activeChannel: -1,
             activeVoice: -1
         }
+        this.pcPeers = {}
     }
 
     componentDidMount() {
@@ -85,7 +86,7 @@ class Index extends React.Component {
         }
 
         // Initialize the media stream
-        navigator.mediaDevices.getUserMedia(mediaStreamConstraints).then(this.gotLocalMediaStream).catch(this.handleLocalMediaStreamError);
+        navigator.mediaDevices.getUserMedia(mediaStreamConstraints).then(mediaStream => this.gotLocalMediaStream(mediaStream)).catch(error => this.handleLocalMediaStreamError(error));
 
         this.voiceSession = App.cable.subscriptions.create({ channel: 'VoiceChatChannel', room: id }, {
             connected: () => {
@@ -95,12 +96,12 @@ class Index extends React.Component {
                 if (data.from === this.props.currentUser.id) return
                 switch (data.type) {
                     case JOIN:
-                        return handleJoin(data)
+                        return this.handleJoin(data)
                     case EXCHANGE:
                         if (data.to !== this.props.currentUser.id) return
-                        return handleExchange(data)
+                        return this.handleExchange(data)
                     case LEAVE:
-                        return handleLeave(data)
+                        return this.handleLeave(data)
                     default:
                         return
                 }
@@ -144,30 +145,35 @@ class Index extends React.Component {
         let pc
 
         if (!this.pcPeers[data.from]) {
-            pc = createPC(data.from, false)
+            pc = this.createPC(data.from, false)
         } else {
             pc = this.pcPeers[data.from]
         }
 
         if (data.candidate) {
-            pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate)))
+            let candidate = JSON.parse(data.candidate)
+            candidate.sdpMid = Number(candidate.sdpMid)
+            pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate))).catch(error => console.log(error))
         }
 
         if (data.sdp) {
             let sdp = JSON.parse(data.sdp)
-            pc.setRemoteDescription(new RTCSessionDescription(sdp)).then(() => {
-                if (sdp.type === 'offer') {
-                    pc.createAnswer().then(answer => {
-                        pc.setLocalDescription(answer)
 
-                        this.broadcastData(this.state.activeVoice, {
-                            type: EXCHANGE,
-                            to: data.from,
-                            sdp: JSON.stringify(pc.localDescription)
+            if (sdp) {
+                pc.setRemoteDescription(new RTCSessionDescription(sdp)).then(() => {
+                    if (sdp.type === 'offer') {
+                        pc.createAnswer().then(answer => {
+                            pc.setLocalDescription(answer)
+    
+                            this.broadcastData(this.state.activeVoice, {
+                                type: EXCHANGE,
+                                to: data.from,
+                                sdp: JSON.stringify(pc.localDescription)
+                            })
                         })
-                    })
-                }
-            })
+                    }
+                })
+            }
         }
     }
 
@@ -203,7 +209,8 @@ class Index extends React.Component {
             }
         }
 
-        pc.onaddstream = event => {
+        // pc.onaddstream = event => {
+        pc.ontrack = event => {
             const element = document.createElement('video')
             element.id = 'remoteVideo' + userId
             element.autoPlay = 'autoPlay'
